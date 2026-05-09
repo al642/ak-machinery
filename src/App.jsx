@@ -17,7 +17,17 @@ const routes = {
 const themeStorageKey = "ak-theme-preference";
 
 function getSystemTheme() {
+  if (!window.matchMedia) return "light";
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function getSavedThemePreference() {
+  try {
+    const savedTheme = window.localStorage.getItem(themeStorageKey);
+    return ["system", "light", "dark"].includes(savedTheme) ? savedTheme : "system";
+  } catch {
+    return "system";
+  }
 }
 
 function normalizePath(path) {
@@ -27,10 +37,7 @@ function normalizePath(path) {
 
 export default function App() {
   const [currentPath, setCurrentPath] = useState(() => normalizePath(window.location.pathname));
-  const [themePreference, setThemePreference] = useState(() => {
-    const savedTheme = window.localStorage.getItem(themeStorageKey);
-    return ["system", "light", "dark"].includes(savedTheme) ? savedTheme : "system";
-  });
+  const [themePreference, setThemePreference] = useState(getSavedThemePreference);
   const [systemTheme, setSystemTheme] = useState(getSystemTheme);
 
   const Page = useMemo(() => routes[currentPath] || Home, [currentPath]);
@@ -50,17 +57,28 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    if (!window.matchMedia) return undefined;
+
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
     const onPreferenceChange = (event) => {
       setSystemTheme(event.matches ? "dark" : "light");
     };
 
-    mediaQuery.addEventListener("change", onPreferenceChange);
-    return () => mediaQuery.removeEventListener("change", onPreferenceChange);
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", onPreferenceChange);
+      return () => mediaQuery.removeEventListener("change", onPreferenceChange);
+    }
+
+    mediaQuery.addListener(onPreferenceChange);
+    return () => mediaQuery.removeListener(onPreferenceChange);
   }, []);
 
   useEffect(() => {
-    window.localStorage.setItem(themeStorageKey, themePreference);
+    try {
+      window.localStorage.setItem(themeStorageKey, themePreference);
+    } catch {
+      // Theme persistence is optional; rendering should never depend on it.
+    }
   }, [themePreference]);
 
   useEffect(() => {
@@ -69,6 +87,13 @@ export default function App() {
   }, [theme]);
 
   useEffect(() => {
+    if (!window.IntersectionObserver) {
+      document.querySelectorAll(".section-reveal").forEach((element) => {
+        element.classList.add("is-visible");
+      });
+      return undefined;
+    }
+
     const elements = document.querySelectorAll(".section-reveal");
     const observer = new IntersectionObserver(
       (entries) => {
