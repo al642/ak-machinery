@@ -10,6 +10,7 @@ body {
   margin: 0;
   color: var(--page-text);
   background: var(--page-bg);
+  min-width: 320px;
   transition: background 220ms ease, color 220ms ease;
 }
 
@@ -88,6 +89,7 @@ main {
   color: var(--header-muted);
   font-size: 0.95rem;
   font-weight: 700;
+  line-height: 1.2;
   position: relative;
 }
 
@@ -230,6 +232,10 @@ h2 {
   gap: 12px;
   min-height: 54px;
   padding: 0 22px;
+}
+
+.text-action {
+  max-width: 100%;
 }
 
 .light-action {
@@ -622,17 +628,36 @@ h2 {
 }
 
 @media (max-width: 900px) {
+  .site-header {
+    gap: 12px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .brand span {
+    min-width: 0;
+  }
+
   .icon-button {
+    flex: 0 0 42px;
     display: inline-flex;
   }
 
   .nav-links {
     background: var(--header-solid);
     border-top: 1px solid var(--line);
+    box-shadow: 0 22px 34px rgba(0, 0, 0, 0.14);
     display: none;
     flex-direction: column;
+    gap: 0;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
     left: 0;
-    padding: 24px;
+    padding: 10px 18px 18px;
     position: absolute;
     right: 0;
     top: var(--header-height);
@@ -642,11 +667,32 @@ h2 {
     display: flex;
   }
 
+  .nav-links a {
+    border-bottom: 1px solid var(--line);
+    color: var(--header-text);
+    padding: 16px 0;
+    width: 100%;
+  }
+
+  .nav-links a::after {
+    bottom: -1px;
+  }
+
   .theme-toggle {
+    flex: 0 0 auto;
     margin-left: auto;
   }
 
+  .hero,
+  .page-hero {
+    min-height: auto;
+    padding-bottom: 64px;
+    padding-top: calc(var(--header-height) + 54px);
+  }
+
   .hero {
+    align-items: start;
+    gap: 34px;
     grid-template-columns: 1fr;
   }
 
@@ -669,10 +715,15 @@ h2 {
 
   .service-row {
     gap: 12px;
+    min-height: 0;
   }
 
   .metrics-band {
     grid-template-columns: 1fr;
+  }
+
+  .site-footer {
+    gap: 28px;
   }
 }
 
@@ -681,26 +732,108 @@ h2 {
     --header-height: 72px;
   }
 
+  body {
+    overflow-wrap: anywhere;
+  }
+
+  .site-header {
+    gap: 8px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .site-logo {
+    height: 38px;
+  }
+
   .brand small {
     display: none;
   }
 
   .brand strong {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    line-height: 1;
+    max-width: 116px;
+  }
+
+  .theme-toggle {
+    gap: 1px;
+    padding: 2px;
+  }
+
+  .theme-toggle button {
+    font-size: 0.68rem;
+    min-height: 30px;
+    padding: 0 7px;
+  }
+
+  .icon-button {
+    height: 38px;
+    width: 38px;
+    flex-basis: 38px;
+  }
+
+  .nav-links {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    line-height: 1.35;
+    margin-bottom: 12px;
   }
 
   h1 {
-    font-size: clamp(2.6rem, 16vw, 4.2rem);
+    font-size: clamp(2.35rem, 13vw, 3.5rem);
+    line-height: 0.98;
+    margin-bottom: 20px;
   }
 
   h2 {
-    font-size: clamp(2rem, 11vw, 3.1rem);
+    font-size: clamp(1.75rem, 9.8vw, 2.55rem);
+    line-height: 1.04;
+    margin-bottom: 18px;
+  }
+
+  .hero p:not(.eyebrow),
+  .page-hero h1 + p,
+  .intro-strip p {
+    font-size: 1rem;
+    line-height: 1.6;
   }
 
   .hero,
   .page-hero {
     padding-left: 18px;
     padding-right: 18px;
+    padding-bottom: 52px;
+    padding-top: calc(var(--header-height) + 40px);
+  }
+
+  .hero {
+    gap: 28px;
+  }
+
+  .hero-visual {
+    aspect-ratio: 16 / 9;
+    border-left-width: 5px;
+  }
+
+  .machine-line {
+    height: 5px;
+  }
+
+  .text-action,
+  .submit-button {
+    justify-content: center;
+    min-height: 50px;
+    width: 100%;
+  }
+
+  .intro-strip {
+    padding-bottom: 44px;
+    padding-top: 44px;
   }
 
   .service-flow,
@@ -712,5 +845,110 @@ h2 {
   .cta-band {
     padding-left: 18px;
     padding-right: 18px;
+  }
+
+  .service-flow,
+  .service-index,
+  .split-story,
+  .directors,
+  .contact-layout,
+  .process-band {
+    padding-bottom: 58px;
+    padding-top: 58px;
+  }
+
+  .section-heading {
+    margin-bottom: 30px;
+  }
+
+  .service-list button,
+  .service-row {
+    gap: 12px;
+    padding: 22px 0;
+  }
+
+  .service-list span,
+  .service-row > span {
+    font-size: 0.82rem;
+  }
+
+  .service-list small,
+  .service-row p,
+  .split-story p,
+  .directors li,
+  .contact-details p,
+  .contact-details a {
+    font-size: 0.98rem;
+    line-height: 1.65;
+  }
+
+  .service-image-slot {
+    min-height: 128px;
+  }
+
+  .metrics-band div {
+    padding: 30px 18px;
+  }
+
+  .metrics-band strong {
+    font-size: 2.4rem;
+  }
+
+  .process-band {
+    gap: 24px;
+  }
+
+  .process-band li {
+    padding: 18px 0;
+  }
+
+  .contact-details a,
+  .contact-details p {
+    gap: 10px;
+  }
+
+  .contact-form {
+    gap: 16px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
+  }
+
+  .cta-band {
+    padding-bottom: 56px;
+    padding-top: 56px;
+  }
+
+  .site-footer {
+    padding-bottom: 52px;
+    padding-top: 46px;
+  }
+
+  .footer-logo {
+    height: 48px;
+  }
+
+  .whatsapp-button {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    height: 48px;
+    right: 16px;
+    width: 48px;
+  }
+}
+
+@media (max-width: 390px) {
+  .brand strong {
+    max-width: 92px;
+  }
+
+  .theme-toggle button {
+    font-size: 0.64rem;
+    padding: 0 5px;
+  }
+
+  h1 {
+    font-size: clamp(2.05rem, 12vw, 2.8rem);
   }
 }
