@@ -1,0 +1,41 @@
+:root {
+  --primary: #f4b400;
+  --secondary: #1f1f1f;
+  --light: #ffffff;
+  --gray: #f5f5f5;
+  --text: #333333;
+  --muted: #6f6f6f;
+  --line: #dfdfdf;
+  --dark-line: #393939;
+  --page-bg: #ffffff;
+  --page-text: #333333;
+  --heading: #1f1f1f;
+  --surface: #ffffff;
+  --surface-soft: #f5f5f5;
+  --header-bg: rgba(255, 255, 255, 0.92);
+  --header-solid: rgba(255, 255, 255, 0.98);
+  --header-text: #1f1f1f;
+  --header-muted: rgba(31, 31, 31, 0.62);
+  --footer-text: rgba(255, 255, 255, 0.78);
+  --max-width: 1180px;
+  --header-height: 78px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--page-text);
+  background: var(--page-bg);
+}
+
+:root[data-theme="dark"] {
+  --gray: #171717;
+  --text: #e8e2d7;
+  --muted: #ada69a;
+  --line: #37322b;
+  --page-bg: #111111;
+  --page-text: #e8e2d7;
+  --heading: #ffffff;
+  --surface: #171717;
+  --surface-soft: #202020;
+  --header-bg: rgba(17, 17, 17, 0.9);
+  --header-solid: rgba(17, 17, 17, 0.98);
+  --header-text: #ffffff;
+  --header-muted: rgba(255, 255, 255, 0.64);
+}
