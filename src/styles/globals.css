@@ -599,8 +599,8 @@ h2 {
 }
 
 .section-reveal {
-  opacity: 0;
-  transform: translateY(34px);
+  opacity: 1;
+  transform: none;
   transition: opacity 700ms ease, transform 700ms ease;
 }
 
