@@ -38,7 +38,11 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
         </span>
       </a>
 
-      <nav className={`nav-links ${open ? "is-open" : ""}`} aria-label="Main navigation">
+      <nav
+        id="main-navigation"
+        className={`nav-links ${open ? "is-open" : ""}`}
+        aria-label="Main navigation"
+      >
         {navItems.map((item) => (
           <a
             key={item.path}
@@ -59,6 +63,8 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
       <button
         className="icon-button menu-button"
         type="button"
+        aria-controls="main-navigation"
+        aria-expanded={open}
         aria-label={open ? "Close navigation" : "Open navigation"}
         onClick={() => setOpen((value) => !value)}
       >

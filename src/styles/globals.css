@@ -11,7 +11,9 @@ body {
   color: var(--page-text);
   background: var(--page-bg);
   min-width: 320px;
-  transition: background 220ms ease, color 220ms ease;
+  transition:
+    background 220ms ease,
+    color 220ms ease;
 }
 
 button,
@@ -31,6 +33,16 @@ a {
 
 main {
   overflow: hidden;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+}
+
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 .site-header {
@@ -45,7 +57,9 @@ main {
   position: fixed;
   right: 0;
   top: 0;
-  transition: background 220ms ease, box-shadow 220ms ease;
+  transition:
+    background 220ms ease,
+    box-shadow 220ms ease;
   z-index: 20;
 }
 
@@ -154,7 +168,11 @@ main {
 .page-hero {
   background:
     linear-gradient(120deg, rgba(31, 31, 31, 0.97), rgba(31, 31, 31, 0.76)),
-    repeating-linear-gradient(90deg, rgba(244, 180, 0, 0.12) 0 1px, transparent 1px 76px);
+    repeating-linear-gradient(
+      90deg,
+      rgba(244, 180, 0, 0.12) 0 1px,
+      transparent 1px 76px
+    );
   color: var(--light);
   min-height: 92vh;
   padding: calc(var(--header-height) + 72px) clamp(18px, 5vw, 72px) 86px;
@@ -252,7 +270,12 @@ h2 {
 
 .hero-visual::before {
   background:
-    linear-gradient(45deg, transparent 0 48%, rgba(244, 180, 0, 0.38) 48% 52%, transparent 52%),
+    linear-gradient(
+      45deg,
+      transparent 0 48%,
+      rgba(244, 180, 0, 0.38) 48% 52%,
+      transparent 52%
+    ),
     linear-gradient(rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
   content: "";
   inset: 0;
@@ -607,7 +630,9 @@ h2 {
 .section-reveal {
   opacity: 1;
   transform: none;
-  transition: opacity 700ms ease, transform 700ms ease;
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
 }
 
 .section-reveal.is-visible {
