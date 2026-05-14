@@ -77,6 +77,22 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
       >
         <span aria-hidden="true">{open ? "X" : "="}</span>
       </button>
+
+      {/* Mobile fallback menu - ensures hamburger always reveals content on small screens */}
+      <div className={`mobile-nav ${open ? "is-open" : ""}`} aria-hidden={!open}>
+        <div className="mobile-nav-inner">
+          {navItems.map((item) => (
+            <button
+              key={item.path}
+              className={currentPath === item.path ? "active" : ""}
+              type="button"
+              onClick={() => handleNavigate(item.path)}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
     </header>
   );
 }

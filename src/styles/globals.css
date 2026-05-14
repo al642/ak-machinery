@@ -794,6 +794,17 @@ section.hero .hero-copy p.hero-lead {
   z-index: 18;
 }
 
+/* Ensure hamburger (icon-button) is only visible on small screens */
+.site-header .icon-button {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .site-header .icon-button {
+    display: inline-flex !important;
+  }
+}
+
 .section-reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -857,6 +868,31 @@ section.hero .hero-copy p.hero-lead {
 
   .nav-links.is-open {
     display: flex;
+  }
+
+  /* Mobile-specific React fallback menu (added to Navbar.jsx) */
+  .mobile-nav {
+    display: none;
+  }
+
+  .mobile-nav.is-open {
+    display: block;
+  }
+
+  .mobile-nav-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mobile-nav-inner button {
+    background: transparent;
+    border: 0;
+    color: var(--header-text);
+    font-weight: 800;
+    padding: 14px 0;
+    text-align: left;
+    width: 100%;
   }
 
   .nav-links a {
