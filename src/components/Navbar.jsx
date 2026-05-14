@@ -13,6 +13,7 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -30,6 +31,13 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [open]);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 900);
+    check();
+    window.addEventListener("resize", check, { passive: true });
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   const handleNavigate = (path) => {
     onNavigate(path);
@@ -67,16 +75,36 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
 
       <ThemeToggle preference={themePreference} onPreferenceChange={onThemePreferenceChange} />
 
-      <button
-        className="icon-button menu-button"
-        type="button"
-        aria-controls="main-navigation"
-        aria-expanded={open}
-        aria-label={open ? "Close navigation" : "Open navigation"}
-        onClick={() => setOpen((value) => !value)}
-      >
-        <span aria-hidden="true">{open ? "X" : "="}</span>
-      </button>
+      {isMobile && (
+        <>
+          <button
+            className="icon-button menu-button"
+            type="button"
+            aria-controls="main-navigation"
+            aria-expanded={open}
+            aria-label={open ? "Close navigation" : "Open navigation"}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span aria-hidden="true">{open ? "X" : "="}</span>
+          </button>
+
+          {/* Mobile fallback menu - ensures hamburger always reveals content on small screens */}
+          <div className={`mobile-nav ${open ? "is-open" : ""}`} aria-hidden={!open}>
+            <div className="mobile-nav-inner">
+              {navItems.map((item) => (
+                <button
+                  key={item.path}
+                  className={currentPath === item.path ? "active" : ""}
+                  type="button"
+                  onClick={() => handleNavigate(item.path)}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Mobile fallback menu - ensures hamburger always reveals content on small screens */}
       <div className={`mobile-nav ${open ? "is-open" : ""}`} aria-hidden={!open}>

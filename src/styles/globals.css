@@ -805,6 +805,43 @@ section.hero .hero-copy p.hero-lead {
   }
 }
 
+/* Strong defaults to avoid duplicate navs showing */
+.mobile-nav {
+  display: none !important;
+}
+
+.site-header .nav-links {
+  display: flex !important;
+}
+
+@media (max-width: 900px) {
+  /* hide the desktop nav links on mobile so only hamburger/menu shows */
+  header.site-header nav#main-navigation,
+  .site-header .nav-links {
+    display: none !important;
+  }
+
+  .mobile-nav {
+    display: none !important; /* default hidden until opened */
+  }
+
+  .mobile-nav.is-open {
+    display: block !important;
+    position: fixed !important;
+    top: calc(var(--header-height) + 10px) !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: var(--mobile-nav-bg) !important;
+    z-index: 9999 !important;
+    padding: 12px 18px !important;
+  }
+}
+
+/* Ensure desktop shows main nav explicitly */
+header.site-header nav#main-navigation {
+  display: flex !important;
+}
+
 .section-reveal {
   opacity: 0;
   transform: translateY(24px);
