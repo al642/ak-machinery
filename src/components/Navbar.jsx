@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Logo from "./Logo.jsx";
 import ThemeToggle from "./ThemeToggle.jsx";
 
@@ -13,7 +13,8 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 900 : false));
+  const navRef = useRef(null);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -33,10 +34,41 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
   }, [open]);
 
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth <= 900);
-    check();
-    window.addEventListener("resize", check, { passive: true });
-    return () => window.removeEventListener("resize", check);
+    if (typeof window === "undefined") return;
+    const mql = window.matchMedia("(max-width: 900px)");
+    const onChange = (e) => setIsMobile(e.matches);
+    setIsMobile(mql.matches);
+    if (mql.addEventListener) {
+      mql.addEventListener("change", onChange);
+    } else {
+      mql.addListener(onChange);
+    }
+    // Keep navRef visibility in sync for cases where CSS may be overridden
+    const syncNav = () => {
+      try {
+        if (!navRef || !navRef.current) return;
+        navRef.current.style.display = mql.matches ? "none" : "";
+      } catch (e) {
+        // ignore
+      }
+    };
+    syncNav();
+
+    if (mql.addEventListener) {
+      mql.addEventListener("change", syncNav);
+    } else {
+      mql.addListener(syncNav);
+    }
+
+    return () => {
+      if (mql.removeEventListener) {
+        mql.removeEventListener("change", onChange);
+        mql.removeEventListener("change", syncNav);
+      } else {
+        mql.removeListener(onChange);
+        mql.removeListener(syncNav);
+      }
+    };
   }, []);
 
   const handleNavigate = (path) => {
@@ -54,6 +86,7 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
       </a>
 
       <nav
+        ref={navRef}
         id="main-navigation"
         className={`nav-links ${open ? "is-open" : ""}`}
         aria-label="Main navigation"
@@ -75,36 +108,34 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
 
       <ThemeToggle preference={themePreference} onPreferenceChange={onThemePreferenceChange} />
 
-      {isMobile && (
-        <>
-          <button
-            className="icon-button menu-button"
-            type="button"
-            aria-controls="main-navigation"
-            aria-expanded={open}
-            aria-label={open ? "Close navigation" : "Open navigation"}
-            onClick={() => setOpen((value) => !value)}
-          >
-            <span aria-hidden="true">{open ? "X" : "="}</span>
-          </button>
+      <>
+        <button
+          className="icon-button menu-button"
+          type="button"
+          aria-controls="main-navigation"
+          aria-expanded={open}
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <span aria-hidden="true">{open ? "X" : "="}</span>
+        </button>
 
-          {/* Mobile fallback menu - ensures hamburger always reveals content on small screens */}
-          <div className={`mobile-nav ${open ? "is-open" : ""}`} aria-hidden={!open}>
-            <div className="mobile-nav-inner">
-              {navItems.map((item) => (
-                <button
-                  key={item.path}
-                  className={currentPath === item.path ? "active" : ""}
-                  type="button"
-                  onClick={() => handleNavigate(item.path)}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
+        {/* Mobile fallback menu - ensures hamburger always reveals content on small screens */}
+        <div className={`mobile-nav ${open ? "is-open" : ""}`} aria-hidden={!open}>
+          <div className="mobile-nav-inner">
+            {navItems.map((item) => (
+              <button
+                key={item.path}
+                className={currentPath === item.path ? "active" : ""}
+                type="button"
+                onClick={() => handleNavigate(item.path)}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
-        </>
-      )}
+        </div>
+      </>
 
 
     </header>

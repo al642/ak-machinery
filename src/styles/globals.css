@@ -810,10 +810,6 @@ section.hero .hero-copy p.hero-lead {
   display: none !important;
 }
 
-.site-header .nav-links {
-  display: flex !important;
-}
-
 @media (max-width: 900px) {
   /* hide the desktop nav links on mobile so only hamburger/menu shows */
   header.site-header nav#main-navigation,
@@ -847,9 +843,12 @@ section.hero .hero-copy p.hero-lead {
   }
 }
 
-/* Ensure desktop shows main nav explicitly */
-header.site-header nav#main-navigation {
-  display: flex !important;
+/* Ensure desktop shows main nav explicitly (desktop-only) */
+@media (min-width: 901px) {
+  header.site-header nav#main-navigation,
+  .site-header .nav-links {
+    display: flex !important;
+  }
 }
 
 .section-reveal {
@@ -1009,6 +1008,47 @@ header.site-header nav#main-navigation {
 
   .site-footer {
     gap: 28px;
+  }
+}
+
+/* Final enforcement: ensure desktop nav hidden on small screens and mobile menu shown only on small screens */
+@media (max-width: 900px) {
+  header.site-header nav#main-navigation,
+  .site-header .nav-links {
+    display: none !important;
+  }
+
+  .site-header .icon-button {
+    display: inline-flex !important;
+  }
+
+  .mobile-nav {
+    display: none !important;
+    opacity: 0 !important;
+    transform: translateY(-6px) !important;
+    pointer-events: none !important;
+  }
+
+  .mobile-nav.is-open {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+  }
+}
+
+@media (min-width: 901px) {
+  header.site-header nav#main-navigation,
+  .site-header .nav-links {
+    display: flex !important;
+  }
+
+  .site-header .icon-button {
+    display: none !important;
+  }
+
+  .mobile-nav {
+    display: none !important;
   }
 }
 
