@@ -822,18 +822,28 @@ section.hero .hero-copy p.hero-lead {
   }
 
   .mobile-nav {
-    display: none !important; /* default hidden until opened */
-  }
-
-  .mobile-nav.is-open {
-    display: block !important;
+    /* animated drawer: hidden via opacity/transform (not display) */
+    opacity: 0 !important;
+    transform: translateY(-10px) !important;
+    pointer-events: none !important;
     position: fixed !important;
     top: calc(var(--header-height) + 10px) !important;
     left: 0 !important;
     right: 0 !important;
-    background: var(--mobile-nav-bg) !important;
+    background: transparent !important;
     z-index: 9999 !important;
     padding: 12px 18px !important;
+    transition:
+      opacity 220ms ease,
+      transform 260ms ease;
+  }
+
+  .mobile-nav.is-open {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    pointer-events: auto !important;
+    /* keep it visible for screen readers/interaction */
+    background: var(--mobile-nav-bg) !important;
   }
 }
 
