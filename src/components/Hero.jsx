@@ -1,5 +1,5 @@
 export default function Hero({
-  eyebrow = "Machinery, fabrication, and factory support",
+  eyebrow = "Embroidery, apparel, and branding",
   title,
   text,
   actionLabel = "Explore services",
@@ -8,19 +8,30 @@ export default function Hero({
 }) {
   return (
     <section className="hero section-reveal">
+      <div className="hero-background" aria-hidden="true">
+        {[
+          "/images/hero/logo embroidery.jpg",
+          "/images/hero/hand embroidery.jpg",
+          "/images/hero/logo embroidery(2).jpg",
+          "/images/hero/designer.jpg",
+        ].map((src, index) => (
+          <img
+            key={src}
+            className="hero-slide"
+            src={src}
+            alt=""
+            style={{ "--slide-index": index }}
+          />
+        ))}
+      </div>
       <div className="hero-copy">
         <p className="eyebrow">{eyebrow}</p>
         <h1>{title}</h1>
-        <p>{text}</p>
+        <p className="hero-lead">{text}</p>
         <button className="text-action" type="button" onClick={() => onNavigate(actionPath)}>
           <span>{actionLabel}</span>
           <span aria-hidden="true">{"->"}</span>
         </button>
-      </div>
-      <div className="hero-visual" aria-hidden="true">
-        <div className="machine-line line-one"></div>
-        <div className="machine-line line-two"></div>
-        <div className="machine-line line-three"></div>
       </div>
     </section>
   );

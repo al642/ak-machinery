@@ -6,32 +6,36 @@ export default function Services({ onNavigate }) {
     <>
       <section className="page-hero section-reveal">
         <p className="eyebrow">Services</p>
-        <h1>Focused support across machinery supply, fabrication, controls, and maintenance.</h1>
+        <h1>Embroidery, branded apparel, and print solutions for Kampala.</h1>
       </section>
 
       <section className="service-index section-reveal">
         {services.map((service, index) => (
           <article className="service-row" key={service.title}>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <div>
+            <span
+              className="service-card-image"
+              style={{ "--service-image": `url("${service.image}")` }}
+              aria-hidden="true"
+            />
+            <div className="service-card-copy">
+              <span>{String(index + 1).padStart(2, "0")}</span>
               <h2>{service.title}</h2>
               <p>{service.description}</p>
             </div>
-            <div className="service-image-slot" style={{ "--image": `url(${service.image})` }} aria-hidden="true" />
           </article>
         ))}
       </section>
 
       <section className="process-band section-reveal">
         <div>
-          <p className="eyebrow">How work moves</p>
-          <h2>Clear scope, practical planning, careful execution, and support after handover.</h2>
+          <p className="eyebrow">Our process</p>
+          <h2>From concept to custom-stitched apparel, we keep delivery simple and local.</h2>
         </div>
         <ol>
-          <li>Understand the machine, line, or production problem.</li>
-          <li>Recommend the practical equipment, fabrication, or service path.</li>
-          <li>Execute with attention to safety, access, downtime, and maintainability.</li>
-          <li>Stay available for parts, repair, and after sales support.</li>
+          <li>Share your brand, artwork, and garment preferences.</li>
+          <li>We digitize, mock up, and preview every design.</li>
+          <li>Production begins with embroidery and quality control on site.</li>
+          <li>Local delivery and pick-up from Nasser Road in Kampala.</li>
         </ol>
       </section>
 

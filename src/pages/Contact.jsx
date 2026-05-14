@@ -3,14 +3,14 @@ export default function Contact() {
     <>
       <section className="page-hero section-reveal">
         <p className="eyebrow">Contact</p>
-        <h1>Bring the machine issue, line plan, or fabrication requirement. We will help shape the next step.</h1>
+        <h1>Ready to outfit your team or event with branded embroidery and apparel.</h1>
       </section>
 
       <section className="contact-layout section-reveal">
         <div className="contact-details">
-          <a href="tel:+60362620120"><span aria-hidden="true">TEL</span>03-62620120</a>
-          <a href="mailto:sales@akmachinery.com.my"><span aria-hidden="true">MAIL</span>sales@akmachinery.com.my</a>
-          <p><span aria-hidden="true">MAP</span>No. 215, Jalan 1, Kawasan Perindustrian Ehsan Jaya, Kepong, Kuala Lumpur, Malaysia, 52100</p>
+          <a href="tel:+256701234567"><span aria-hidden="true">TEL</span>+256 701 234 567</a>
+          <a href="mailto:hello@akmachinery.ug"><span aria-hidden="true">MAIL</span>hello@akmachinery.ug</a>
+          <p><span aria-hidden="true">MAP</span>Nasser Road, Kampala, Uganda</p>
         </div>
 
         <form className="contact-form">
@@ -23,8 +23,8 @@ export default function Contact() {
             <input type="email" name="email" autoComplete="email" />
           </label>
           <label>
-            <span>Subject</span>
-            <input type="text" name="subject" />
+            <span>Business</span>
+            <input type="text" name="business" />
           </label>
           <label>
             <span>Message</span>

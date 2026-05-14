@@ -123,7 +123,7 @@ export default function App() {
       <main>
         <Page onNavigate={navigate} />
       </main>
-      <Footer onNavigate={navigate} />
+      <Footer onNavigate={navigate} theme={theme} />
       <WhatsAppButton />
     </>
   );

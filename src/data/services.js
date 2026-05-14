@@ -1,50 +1,54 @@
 export const services = [
   {
-    title: "Food Processing Machinery",
+    title: "Custom Embroidery & Patches",
     description:
-      "Supply and support for efficient production equipment built around hygiene, output, and reliability.",
-    image: "/images/services/food-processing.jpg",
+      "Premium stitch work for uniforms, caps, bags, and branded patches with strong color and detail.",
+    image: "/images/hero/logo embroidery.jpg",
   },
   {
-    title: "Industrial Machinery & Equipment",
+    title: "Corporate Apparel",
     description:
-      "Machinery sourcing, installation, upgrades, and support for demanding industrial environments.",
-    image: "/images/services/industrial-machinery.jpg",
+      "Branded shirts, polos, jackets, and workwear for teams, schools, and events in Kampala.",
+    image: "/images/services/corporate apparel.jpg",
   },
   {
-    title: "Stainless Steel Fabrication",
+    title: "Promotional Printing",
     description:
-      "Custom stainless steel fabrication for durable, clean, and production-ready factory requirements.",
-    image: "/images/services/stainless-fabrication.jpg",
+      "Screen printing, vinyl, and sublimation for eye-catching merchandise and event clothing.",
+    image: "/images/services/promtional printing.jpg",
   },
   {
-    title: "Electrical Switch Board & Control Panel",
+    title: "Uniforms & Team Wear",
     description:
-      "Control panels, switch boards, and electrical integration for safer and smarter machine operation.",
-    image: "/images/services/control-panel.jpg",
+      "Custom uniforms for hospitality, schools, sports teams, and retail staff delivered from Nasser Road.",
+    image: "/images/hero/designer.jpg",
   },
   {
-    title: "Spare Parts & Tools Supply",
+    title: "Logo Digitization",
     description:
-      "Practical parts sourcing and tooling support to reduce stoppages and keep operations moving.",
-    image: "/images/services/spare-parts.jpg",
+      "Professional artwork preparation to ensure crisp embroidery and printed branding every time.",
+    image:
+      "https://images.unsplash.com/photo-1770453676391-90fb980543e5?auto=format&fit=crop&w=900&q=80",
   },
   {
-    title: "Layout Planning & Design",
+    title: "Event Merchandise",
     description:
-      "Production layout thinking that improves flow, access, maintainability, and long-term scalability.",
-    image: "/images/services/layout-design.jpg",
+      "Branded apparel for conferences, graduations, weddings, and community gatherings across Uganda.",
+    image:
+      "https://images.unsplash.com/photo-1763380631290-1fcdb1353794?auto=format&fit=crop&w=900&q=80",
   },
   {
-    title: "Consultation",
+    title: "Startup Branding Kits",
     description:
-      "Technical advice for machinery selection, process improvement, fabrication, and project planning.",
-    image: "/images/services/consultation.jpg",
+      "Complete small-business branding support with embroidered labels, uniforms, and promo wear.",
+    image:
+      "https://images.unsplash.com/photo-1768056423512-ad808053041f?auto=format&fit=crop&w=900&q=80",
   },
   {
-    title: "After Sales Service",
+    title: "Fast Local Delivery",
     description:
-      "Responsive maintenance, repair, and follow-through after installation so machines keep earning.",
-    image: "/images/services/after-sales.jpg",
+      "Quick, friendly service from Nasser Road with local support for Kampala businesses.",
+    image:
+      "https://images.unsplash.com/photo-1765608461706-2678e824ed15?auto=format&fit=crop&w=900&q=80",
   },
 ];

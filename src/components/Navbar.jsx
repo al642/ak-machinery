@@ -12,13 +12,24 @@ const navItems = [
 export default function Navbar({ currentPath, onNavigate, theme, themePreference, onThemePreferenceChange }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const nextScrollY = window.scrollY;
+      const movingDown = nextScrollY > lastScrollY;
+
+      setScrolled(nextScrollY > 16);
+      setHidden(movingDown && nextScrollY > 150 && !open);
+      lastScrollY = Math.max(nextScrollY, 0);
+    };
+
     onScroll();
-    window.addEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [open]);
 
   const handleNavigate = (path) => {
     onNavigate(path);
@@ -26,16 +37,12 @@ export default function Navbar({ currentPath, onNavigate, theme, themePreference
   };
 
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""} ${hidden ? "is-hidden" : ""}`}>
       <a className="brand" href="/" onClick={(event) => {
         event.preventDefault();
         handleNavigate("/");
       }}>
-        <Logo variant={theme === "dark" ? "light" : "dark"} />
-        <span>
-          <strong>AK Machinery</strong>
-          <small>Solution Sdn. Bhd.</small>
-        </span>
+        <Logo variant={theme === "dark" ? "dark" : "light"} />
       </a>
 
       <nav
